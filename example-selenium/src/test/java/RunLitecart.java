@@ -5,6 +5,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class RunLitecart {
@@ -13,8 +15,23 @@ public class RunLitecart {
 
     @BeforeAll
     public static void start() {
-        System.setProperty("webdriver.chrome.driver", "lib\\chromedriver.exe");
-        webDriver = new ChromeDriver();
+        String browserName = "edge";
+        switch (browserName) {
+            case ("chrome"):
+                System.setProperty("webdriver.chrome.driver", "lib\\chromedriver.exe");
+                webDriver = new ChromeDriver();
+                break;
+            case ("firefox"):
+                System.setProperty("webdriver.gecko.driver", "lib\\geckodriver.exe");
+                webDriver = new FirefoxDriver();
+                break;
+            case ("edge"):
+                System.setProperty("webdriver.edge.driver", "lib\\msedgedriver.exe");
+                webDriver = new EdgeDriver();
+                break;
+            default:
+                break;
+        }
         wait = new WebDriverWait(webDriver, 10);
     }
 
